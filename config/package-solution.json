@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "student-announcements-client-side-solution",
+    "id": "cac87a26-15cc-47b8-9fff-f71400c93fe3",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.14.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "student-announcements description"
+      },
+      "longDescription": {
+        "default": "student-announcements description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "student-announcements Feature",
+        "description": "The feature that activates elements of the student-announcements solution.",
+        "id": "07fb537b-0ea1-4cae-a6ec-488e15cff7e8",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/student-announcements.sppkg"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.14.0",
+    "libraryName": "student-announcements",
+    "libraryId": "cac87a26-15cc-47b8-9fff-f71400c93fe3",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "student-announcements",
+    "solutionShortDescription": "student-announcements description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
