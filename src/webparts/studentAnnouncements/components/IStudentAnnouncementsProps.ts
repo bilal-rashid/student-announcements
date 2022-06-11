@@ -1,7 +1,6 @@
 export interface IStudentAnnouncementsProps {
-  description: string;
-  isDarkTheme: boolean;
-  environmentMessage: string;
-  hasTeamsContext: boolean;
+  users: string;
+  content: string;
   userDisplayName: string;
+  email: string;
 }

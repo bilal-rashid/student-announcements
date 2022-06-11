@@ -7,13 +7,14 @@ import {
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
-
-import * as strings from 'StudentAnnouncementsWebPartStrings';
 import StudentAnnouncements from './components/StudentAnnouncements';
+import { default as pnp } from "sp-pnp-js";
 import { IStudentAnnouncementsProps } from './components/IStudentAnnouncementsProps';
-
 export interface IStudentAnnouncementsWebPartProps {
-  description: string;
+  users: string;
+  content: string;
+  userDisplayName: string;
+  userEmail: string;
 }
 
 export default class StudentAnnouncementsWebPart extends BaseClientSideWebPart<IStudentAnnouncementsWebPartProps> {
@@ -22,35 +23,25 @@ export default class StudentAnnouncementsWebPart extends BaseClientSideWebPart<I
   private _environmentMessage: string = '';
 
   protected onInit(): Promise<void> {
-    this._environmentMessage = this._getEnvironmentMessage();
-
-    var email=this.context.pageContext.user.displayName;
-    console.log(email);
-
-    return super.onInit();
+    return super.onInit().then(_ => {
+      pnp.setup({
+        spfxContext: this.context
+      });
+    });
   }
 
   public render(): void {
     const element: React.ReactElement<IStudentAnnouncementsProps> = React.createElement(
       StudentAnnouncements,
       {
-        description: this.properties.description,
-        isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        users: this.properties.users,
+        content: this.properties.content,
+        userDisplayName: this.context.pageContext.user.displayName,
+        email: this.context.pageContext.user.email,
       }
     );
 
     ReactDom.render(element, this.domElement);
-  }
-
-  private _getEnvironmentMessage(): string {
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams
-      return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
-    }
-
-    return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
@@ -81,15 +72,18 @@ export default class StudentAnnouncementsWebPart extends BaseClientSideWebPart<I
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: 'Properties'
           },
           groups: [
             {
-              groupName: strings.BasicGroupName,
+              groupName: 'List Titles',
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
+                PropertyPaneTextField('users', {
+                  label: 'Users Data List Title'
+                }),
+                PropertyPaneTextField('content', {
+                  label: 'Personalised Content List Title'
+                }),
               ]
             }
           ]
