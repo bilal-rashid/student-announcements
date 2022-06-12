@@ -10,6 +10,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import StudentAnnouncements from './components/StudentAnnouncements';
 import { default as pnp } from "sp-pnp-js";
 import { IStudentAnnouncementsProps } from './components/IStudentAnnouncementsProps';
+import { SPComponentLoader } from '@microsoft/sp-loader';
 export interface IStudentAnnouncementsWebPartProps {
   users: string;
   content: string;
@@ -21,7 +22,10 @@ export default class StudentAnnouncementsWebPart extends BaseClientSideWebPart<I
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
-
+  constructor() {
+    super();
+    SPComponentLoader.loadCss(require('../studentAnnouncements/assets/fabric.css'));
+  }
   protected onInit(): Promise<void> {
     return super.onInit().then(_ => {
       pnp.setup({

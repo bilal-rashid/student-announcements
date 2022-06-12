@@ -3,6 +3,41 @@ import styles from './StudentAnnouncements.module.scss';
 import { IStudentAnnouncementsProps } from './IStudentAnnouncementsProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { default as pnp } from "sp-pnp-js";
+import { Icon } from '@fluentui/react/lib/Icon';
+import { Stack, IStackStyles, IStackTokens } from '@fluentui/react/lib/Stack';
+import { mergeStyles, DefaultPalette } from '@fluentui/react/lib/Styling';
+import {  IStackItemStyles } from '@fluentui/react/lib/Stack';
+
+const stackStyles: IStackStyles = {
+    root: {
+        background: 'white'
+    },
+};
+const stackItemStyles: IStackItemStyles = {
+    root: {
+        alignItems: 'center',
+        background: DefaultPalette.white,
+        color: DefaultPalette.black,
+        display: 'flex',
+        justifyContent: 'center',
+        paddingLeft: 5,
+    },
+};
+const stackItemStyles2: IStackItemStyles = {
+    root: {
+        marginTop: 20,
+        paddingLeft: 5,
+        paddingRight: 5,
+    },
+};
+
+// Tokens definition
+const outerStackTokens: IStackTokens = { childrenGap: 5 };
+const innerStackTokens: IStackTokens = {
+    childrenGap: 2,
+    padding: 5,
+};
+
 export interface IStudentAnnouncementsState {
     isUserValid: boolean;
     studentMetadata: any;
@@ -95,10 +130,33 @@ export default class StudentAnnouncements extends React.Component<IStudentAnnoun
       <section className={`${styles.studentAnnouncements}`}>
           {this.state?.isUserValid ?
               <>
-                  <h2 style={{color: '#394c6b'}}>Welcome, {escape(userDisplayName)}!</h2>
+                  <h2 style={{color: '#354969'}}>Welcome, {escape(userDisplayName)}!</h2>
                   <div className={styles.welcome}>
-                      {/*<div>{environmentMessage}</div>*/}
-                      {/*<div>Web part property value: <strong>{escape(description)}</strong></div>*/}
+                      <div className="ms-Grid" dir="ltr">
+
+                          <div className="ms-Grid-row">
+                              {
+                                  this.state?.filteredList?.map(item =>
+                                  <div className={styles.box}>
+                                      <Stack tokens={outerStackTokens}>
+                                          <Stack styles={stackStyles} tokens={innerStackTokens}>
+                                              <Stack.Item styles={stackItemStyles}>
+                                                  <div style={{width: '100%'}} className="ms-Grid" dir="ltr">
+                                                      <div className="ms-Grid-row">
+                                                          <div className={styles.title}> {item.Title}</div>
+                                                         <a target={'_blank'} href={item.ContentUrl.Url}><div className="ms-Grid-col ms-lg2"><Icon className={styles.icon} iconName="SkypeCircleArrow" /></div></a>
+                                                      </div>
+                                                  </div>
+                                              </Stack.Item>
+                                              <Stack.Item styles={stackItemStyles2}>
+                                                  <p style={{textAlign: 'left'}}> {item.PersonalisedContent} </p>
+                                              </Stack.Item>
+                                          </Stack>
+                                      </Stack>
+                                  </div>)
+                              }
+                          </div>
+                      </div>
                   </div>
               </>
               : null}

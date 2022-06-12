@@ -9,6 +9,40 @@
     font-family: $ms-font-family-fallbacks;
   }
 }
+.box {
+  @include ms-Grid-col;
+  @include ms-xl3;
+  @include ms-lg3;
+  border-radius: 4px;
+  border: 1px solid #BDBEC2;
+  background: #fff;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 8px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  width: 250px !important;
+  border-bottom-color: #BE492B;
+  border-bottom-width: 5px;
+}
+.title {
+  @include ms-Grid-col;
+  @include ms-lg10;
+  color: #354969;
+  font-weight: bolder;
+  font-size: 19px;
+  text-align: left;
+}
+.text {
+  color: black;
+  font-weight: normal;
+  font-size: 17px;
+}
+.icon {
+  margin-top: 5px;
+  color: #354969;
+  transform: rotate(180deg);
+}
 
 .welcome {
   text-align: center;
