@@ -13,6 +13,5 @@
   },
   "externals": {},
   "localizedResources": {
-    "StudentAnnouncementsWebPartStrings": "lib/webparts/studentAnnouncements/loc/{locale}.js"
   }
 }

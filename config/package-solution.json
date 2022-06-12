@@ -3,7 +3,7 @@
   "solution": {
     "name": "student-announcements",
     "id": "cac87a26-15cc-47b8-9fff-f71400c93fe3",
-    "version": "1.0.0.2",
+    "version": "1.0.0.3",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
